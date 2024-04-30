@@ -1,12 +1,12 @@
-FROM node:18-alpine as base
+FROM node:18-alpine
 WORKDIR /usr/src
 COPY package*.json ./
 
 EXPOSE 5000
 
-FROM base as development
-ENV NODE_ENV=development
+# FROM base as development
+# ENV NODE_ENV=development
 RUN npm ci
-COPY --chown=node:node . ./
+COPY . .
 USER node
 CMD ["npm", "run", "start"]

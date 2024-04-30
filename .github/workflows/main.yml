@@ -51,3 +51,4 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: cd Desktop/docker-gh-actions && docker compose up
+          # script: cd Desktop/docker-gh-actions && docker compose up -d && docker image prune -a -f
