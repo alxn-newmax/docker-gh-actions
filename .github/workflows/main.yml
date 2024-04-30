@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd Desktop &&
+            cd Desktop
             echo some-text > Desktop_file212.txt
             # cd /Desktop
             # cd /docker-gh-actions
