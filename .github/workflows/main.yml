@@ -46,4 +46,6 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: echo some-text > filename.txt
+          script: |
+            cd ..
+            echo some-text > file.txt
