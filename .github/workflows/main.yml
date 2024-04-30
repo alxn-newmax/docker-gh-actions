@@ -46,4 +46,4 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: cd .. && cd /tarasiuk/Desktop/docker-gh-actions && del make
+          script: echo some-text > filename.txt
