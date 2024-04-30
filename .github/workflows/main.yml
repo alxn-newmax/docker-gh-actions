@@ -48,6 +48,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /Desktop
-            dir
-            cdc /docker-gh-actions
+            echo some-text > Desktop_file.txt
+            cd /docker-gh-actions
             echo some-text > file.txt
