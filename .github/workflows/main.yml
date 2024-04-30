@@ -51,7 +51,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            echo "I am $FOO"
-            echo "I am $BAR"
-            echo "sha: $SHA"
+            cd Desktop/docker-gh-actions
+            echo some-text > Desktop_file.txt
           # script: cd Desktop/docker-gh-actions && echo some-text > Desktop_file212.txt
