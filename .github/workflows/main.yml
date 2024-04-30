@@ -48,4 +48,5 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd ..
+            cd tarasiuk
             echo some-text > file.txt
