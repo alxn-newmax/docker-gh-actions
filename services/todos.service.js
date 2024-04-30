@@ -2,6 +2,7 @@ import TodosSchema from "../models/todos.model.js";
 
 class Todos {
   async addTask(req, res) {
+    console.log('first')
     await res.send({ status: 200 });
   }
   async updateTask(req, res) {
