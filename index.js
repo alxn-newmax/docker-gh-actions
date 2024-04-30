@@ -1,8 +1,8 @@
 import cors from "cors";
-import redis from "redis";
+// import redis from "redis";
 import express from "express";
 import router from "./routes/index.js";
-import { openConnection } from "./database/connection.js";
+// import { openConnection } from "./database/connection.js";
 
 export class App {
   constructor() {
@@ -10,7 +10,7 @@ export class App {
     this.version = "/api";
     this.env = process.env.NODE_ENV;
     this.port = parseInt(process.env.PORT, 10) || 5500;
-    this.redisPort = parseInt(process.env.REDIS_PORT, 10) || 6379;
+    // this.redisPort = parseInt(process.env.REDIS_PORT, 10) || 6379;
   }
 
   middlewares() {
@@ -35,11 +35,11 @@ export class App {
     this.app.use(this.version, router);
   }
 
-  async redis() {
-    const client = redis.createClient(this.redisPort);
-    await client.connect();
-    return client;
-  }
+  // async redis() {
+  //   const client = redis.createClient(this.redisPort);
+  //   await client.connect();
+  //   return client;
+  // }
 
   async run() {
     // await openConnection();
