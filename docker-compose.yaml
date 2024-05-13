@@ -1,0 +1,22 @@
+name: newmax
+version: "3.8"
+
+services:
+  service:
+    container_name: gh-actions
+    env_file:
+      - .env
+    ports:
+      - $PORT:$PORT
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    volumes:
+      - .:/app/
+      - /app/node_modules
+
+networks:
+  default:
+    external: true
+    name: redis-network

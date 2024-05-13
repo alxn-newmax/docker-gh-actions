@@ -1,8 +1,8 @@
 import cors from "cors";
-import redis from "redis";
 import express from "express";
 import router from "./routes/index.js";
 import { openConnection } from "./database/connection.js";
+import { Redis } from "ioredis";
 
 export class App {
   constructor() {
@@ -36,6 +36,7 @@ export class App {
   }
 
   async redis() {
+    const redis = new Redis();
     const client = redis.createClient(this.redisPort);
     await client.connect();
     return client;
