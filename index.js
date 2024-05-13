@@ -36,10 +36,15 @@ export class App {
   }
 
   async redis() {
-    const redis = new Redis();
-    const client = redis.createClient(this.redisPort);
-    await client.connect();
-    return client;
+    const port = parseInt(process.env.REDIS_PORT, 10) || 6379;
+    const redistConfig =
+      process.env.NODE_ENV === "development"
+        ? { port }
+        : { host: "newmax-redis" };
+
+    const redisClient = new Redis(redistConfig);
+    redisClient.set("1sdf", "sdfsdf");
+    return redisClient;
   }
 
   async run() {
@@ -49,6 +54,7 @@ export class App {
   }
 
   async main() {
+    this.redis();
     this.middlewares();
     this.routes();
     await this.run();
