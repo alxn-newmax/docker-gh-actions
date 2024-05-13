@@ -10,7 +10,7 @@ export class App {
     this.version = "/api";
     this.env = process.env.NODE_ENV;
     this.port = parseInt(process.env.PORT, 10) || 5500;
-    this.redisPort = parseInt(process.env.REDIS_PORT, 10) || 6379;
+    // this.redisPort = parseInt(process.env.REDIS_PORT, 10) || 6379;
   }
 
   middlewares() {
