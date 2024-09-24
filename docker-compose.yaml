@@ -1,9 +1,8 @@
-name: newmax
-version: "3.8"
+name: gh
 
 services:
-  service:
-    container_name: gh-actions
+  test:
+    container_name: test
     env_file:
       - .env
     ports:
@@ -12,11 +11,5 @@ services:
       context: .
       dockerfile: Dockerfile
     command: npm run start
-    volumes:
-      - .:/app/
-      - /app/node_modules
-
-networks:
-  default:
-    external: true
-    name: redis-network
+    environment:
+      - NODE_ENV=production
