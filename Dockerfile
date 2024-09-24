@@ -2,7 +2,7 @@ FROM node:18-alpine
 WORKDIR /usr/src
 COPY package*.json ./
 
-EXPOSE 5000
+# EXPOSE 5000
 
 # FROM base as development
 # ENV NODE_ENV=development
