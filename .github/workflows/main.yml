@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd Desktop/core-services
-            cd ${{ github.repository }}
+            cd ${{ github.repo }}
             touch empty_file.txt
             type NUL > empty_file.txt
           # script: cd Desktop/docker-gh-actions && docker compose up -d && docker image prune -a -f
