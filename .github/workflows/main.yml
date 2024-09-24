@@ -55,8 +55,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            echo "Hello World!"
-            ssh -T ${{ secrets.SERVER_HOST }}
-          # script: |
-          #   docker pull alxnnewmax/${{ secrets.DOCKER_IMAGE }}
-          #   docker run -d --name my-container alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
+            docker pull alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
+            docker run -d --name my-container alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
