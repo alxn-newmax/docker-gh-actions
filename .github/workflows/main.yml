@@ -47,12 +47,12 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            type NUL > empty_file.txt
-            cd Desktop/core-services
-            type NUL > empty_file.txt
-            cd ${{ secrets.DOCKER_IMAGE }}
-            touch empty_file.txt
-            type NUL > empty_file.txt
+            type NUL > docker_image_name.txt
+            echo ${{ secrets.DOCKER_IMAGE }} > docker_image_name.txt
+            touch .env
+            echo "OPENAI_API_KEY=your_api_key_here" >> .env
+            echo "OTHER_VAR=some_other_value" >> .env
+          # cd Desktop/core-services
           # script: cd Desktop/docker-gh-actions && docker compose up -d && docker image prune -a -f
 
       # - name: Deploy to remote server
