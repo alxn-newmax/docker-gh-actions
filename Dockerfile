@@ -1,7 +1,13 @@
-FROM node:18-alpine
+FROM node:18
 WORKDIR /usr/src
 COPY package*.json ./
-RUN npm ci
-COPY . .
-USER node
+
+ENV TZ=Europe/Moscow
+
+EXPOSE 4900
+
+RUN npm install
+
+COPY . ./
+
 CMD ["npm", "run", "start"]
