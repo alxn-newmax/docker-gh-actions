@@ -46,10 +46,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: |
-            cd Desktop
-            type NUL > docker_image_name.txt
-            echo ${{ secrets.DOCKER_IMAGE }} > docker_image_name.txt
+          script: cd Desktop/core-services && type NUL > docker_image_name.txt
           # script: cd Desktop/docker-gh-actions && docker compose up -d && docker image prune -a -f
 
       # - name: Deploy to remote server
