@@ -38,7 +38,6 @@ export class App {
   }
 
   async main() {
-    this.redis();
     this.middlewares();
     this.routes();
     await this.run();
