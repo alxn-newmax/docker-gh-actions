@@ -56,4 +56,4 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             docker pull alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
-            docker run -d --name my-container alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
+            docker run -d --name my-container alxnnewmax/${{ secrets.DOCKER_IMAGE }}
