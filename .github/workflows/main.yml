@@ -46,7 +46,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master
+          script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker compose up -d && docker image prune -a -f
           # script: cd Desktop/docker-gh-actions && docker compose up -d && docker image prune -a -f
 
       # - name: Deploy to remote server
