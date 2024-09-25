@@ -1,7 +1,6 @@
 class Todos {
   async addTask(req, res) {
-    console.log("first");
-    await res.send({ status: 200 });
+    await res.send({ status: 200, message: "Task added successfully" });
   }
   async updateTask(req, res) {
     await res.send({ status: 200 });
