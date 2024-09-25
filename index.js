@@ -7,7 +7,7 @@ export class App {
     this.app = express();
     this.version = "/api";
     this.env = process.env.NODE_ENV;
-    this.port = parseInt(process.env.PORT, 10) || 5500;
+    this.port = 4900;
   }
 
   middlewares() {
@@ -30,7 +30,6 @@ export class App {
     });
     this.app.use(this.version, router);
   }
-
 
   async run() {
     const serverInfo = `Server is running on port: ${this.port}`;
