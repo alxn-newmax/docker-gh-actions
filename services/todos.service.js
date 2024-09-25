@@ -3,7 +3,7 @@ class Todos {
     await res.send({ status: 200, message: "Task added successfully" });
   }
   async updateTask(req, res) {
-    await res.send({ status: 200 });
+    await res.send({ status: 200, message: "Task added successfully" });
   }
   async deleteTask(req, res) {
     await res.send({ status: 200 });
