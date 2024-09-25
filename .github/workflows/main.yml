@@ -49,6 +49,9 @@ jobs:
           script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin && docker compose up -d
           # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker compose up -d
           # script: cd Desktop/docker-gh-actions && docker compose up -d && docker image prune -a -f
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       # - name: Deploy to remote server
       #   uses: appleboy/ssh-action@v1.0.3
