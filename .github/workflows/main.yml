@@ -46,7 +46,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: cd Desktop/test && git clone https://github.com/alxn-newmax/docker-gh-actions.git . && docker-compose up
+          script: cd Desktop/test && echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin && docker-compose up -d
           # env:
           #   NAME: ${{ secrets.DOCKER_USERNAME }}
           #   PASS: ${{ secrets.DOCKER_PASSWORD }}
