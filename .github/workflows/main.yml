@@ -42,7 +42,7 @@ jobs:
 
       - name: Update version in server
         uses: appleboy/ssh-action@v1.0.3
-        env:
+        # env:
           # USERNAME: ${{ secrets.DOCKER_USERNAME }}
           # PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         with:
