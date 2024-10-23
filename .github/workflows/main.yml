@@ -16,12 +16,12 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          
+
       - name: Deploy to server
         run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
-          ssh -o StrictHostKeyChecking=no administrator@78.24.181.92 "docker-compose -f Desktop/services/docker-gh-actions/docker-compose.yml up -d"
+          ssh -o StrictHostKeyChecking=no tarasiuk@78.24.181.92 "docker-compose -f Desktop/services/docker-gh-actions/docker-compose.yml up -d"
           
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
