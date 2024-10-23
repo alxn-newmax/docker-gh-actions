@@ -17,77 +17,13 @@ jobs:
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d '/' -f 2)
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
 
-      # - name: Setup SSH
-      #   uses: webfactory/ssh-agent@v0.5.3
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # - name: Deploy to server
-      #   run: |
-      #     eval $(ssh-agent -s)
-      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
-      #     ssh administrator@78.24.181.92 "docker-compose -f Desktop/services/docker-gh-actions/docker-compose.yml up -d"
-          
-      # - name: Set up QEMU
-      #   uses: docker/setup-qemu-action@v3
-
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
-
-      # - name: Log in to Docker Hub
-      #   uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-      #   with:
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-
-      # - name: Extract metadata (tags, labels) for Docker
-      #   id: meta
-      #   uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-      #   with:
-      #     images: alxnnewmax/${{ secrets.DOCKER_IMAGE }}
-      #     # tags: ${{  github.ref_name }}
-
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-      #   with:
-      #     context: .
-      #     file: ./Dockerfile
-      #     push: true
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}
-
       - name: Update version in server
         uses: appleboy/ssh-action@master
-        # env:
-          # USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          # PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          # key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: cd Desktop/services && echo ${{ env.REPO_NAME }} >> text.txt
-          # script: cd Desktop/services/docker-gh-actions && echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin && git pull origin master && docker-compose up -d
-          # script: cd Desktop/services/docker-gh-actions && echo username=${{ secrets.DOCKER_USERNAME }} >> credentials.txt && echo password=${{ secrets.DOCKER_PASSWORD }} >> credentials.txt && echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin && git pull origin master && docker-compose up -d
-          # envs: USERNAME,PASSWORD
-          # script: cd Desktop/test && echo "username=$USERNAME" >> credentials.txt && echo "password=$PASSWORD" >> credentials.txt && echo $PASSWORD | docker login -u $USERNAME --password-stdin && docker-compose up -d
-          # script: cd Desktop/services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && echo ${{ secrets.DOCKER_USERNAME }} > docker_username.txt && echo ${{ secrets.DOCKER_PASSWORD }} > docker_password.txt && docker system prune -f && docker logout && echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin && docker-compose up -d
-          # script: cd Desktop/services/${{ secrets.DOCKER_IMAGE }} && git clone https://github.com/alxn-newmax/docker-gh-actions.git .
-          # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker ps && docker run -p 4900:4900 -d --rm --name test2 alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
-          # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && "C:\Program Files\Git\bin\sh.exe" docker-up.sh
-          # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} && docker compose up -d
-          # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin && docker compose up -d
-          # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker compose up -d
-
-      # - name: Deploy to remote server
-      #   uses: appleboy/ssh-action@v1.0.3
-      #   with:
-      #     host: ${{ secrets.SERVER_HOST }}
-      #     username: ${{ secrets.SERVER_USER }}
-      #     password: ${{ secrets.SERVER_PASSWORD }}
-      #     script: |
-      #       docker pull alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
-      #       docker run -d --name my-container alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
+          script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
 
   # send_message:
   #   runs-on: ubuntu-latest
