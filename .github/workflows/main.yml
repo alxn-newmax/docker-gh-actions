@@ -26,7 +26,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             RESPONSE=$(curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }})
-            echo "RESPONSE=${RESPONSE}" >> $GITHUB_ENV
             MESSAGE=$(echo "${RESPONSE}" | jq -r '.message')
             echo "MESSAGE=${MESSAGE}" >> $GITHUB_ENV
           # script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
