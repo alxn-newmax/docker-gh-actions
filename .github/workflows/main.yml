@@ -26,9 +26,27 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             RESPONSE=$(curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }})
-            MESSAGE=$(echo "${RESPONSE}" | jq -r '.message')
-            echo "::set-output name=message::${MESSAGE}"
+            echo "RESPONSE=${RESPONSE}" >> $GITHUB_ENV
+            MESSAGE=$(echo "${{ env.RESPONSE }}" | jq -r '.message')
+            echo "MESSAGE=${MESSAGE}" >> $GITHUB_ENV
+            curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "chat_id": "${{ secrets.TELEGRAM_TO }}",
+              "text": "${{ env.MESSAGE }}",
+              "parse_mode": "HTML"
+            }'
+          # curl -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage
           # script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
+      # - name: Send message to Telegram
+      #   run: |
+      #     curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+      #     -H "Content-Type: application/json" \
+      #     -d '{
+      #       "chat_id": "${{ secrets.TELEGRAM_TO }}",
+      #       "text": "'"${{ env.MESSAGE }}"'",
+      #       "parse_mode": "HTML"
+      #     }'
         
   send_message:
     runs-on: ubuntu-latest
