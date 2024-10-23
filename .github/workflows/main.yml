@@ -12,6 +12,13 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy to server
+        run: ssh administrator@78.24.181.92 "docker-compose -f Desktop/services/docker-gh-actions/docker-compose.yml up -d"
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
