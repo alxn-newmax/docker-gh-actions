@@ -27,8 +27,7 @@ jobs:
           script: |
             RESPONSE=$(curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }})
             MESSAGE=$(echo "${RESPONSE}" | jq -r '.message')
-            echo "RESPONSE=${RESPONSE}" >> $GITHUB_ENV  # Сохранение RESPONSE в GITHUB_ENV
-            echo "MESSAGE=${MESSAGE}" >> $GITHUB_ENV  # Сохранение MESSAGE в GITHUB_ENV
+            echo "::set-output name=message::${MESSAGE}"
           # script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
         
   send_message:
@@ -40,4 +39,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: ${{ env.MESSAGE }}
+          message: ${{ steps.update_version.outputs.message }}
