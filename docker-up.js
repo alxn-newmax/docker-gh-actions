@@ -2,12 +2,14 @@ import { exec } from 'child_process';
 
 // Функция для запуска docker-compose up
 function startDockerCompose() {
-    exec('docker info', (error) => {
+    exec('docker info', (error, stdout, stderr) => {
         if (error) {
             console.error(`Docker не запущен или не установлен: ${error.message}`);
             return;
         }
-        
+
+        console.log(`Вывод: ${stdout}`);
+
         exec('docker-compose up -d', (error, stdout, stderr) => {
             if (error) {
                 console.error(`Ошибка: ${error.message}`);
