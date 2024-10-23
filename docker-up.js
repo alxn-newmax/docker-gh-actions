@@ -2,7 +2,7 @@ import { exec } from 'child_process';
 
 // Функция для запуска docker-compose up
 function startDockerCompose() {
-    exec('docker info', (error, stdout, stderr) => {
+    exec('docker login -u alxnnewmax -p dckr_pat_d411YDUBfm03_7ByJPy7AKuR-AY', (error, stdout, stderr) => {
         if (error) {
             console.error(`Docker не запущен или не установлен: ${error.message}`);
             return;
