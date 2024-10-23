@@ -3,13 +3,9 @@ name: gh
 services:
   test:
     container_name: test
-    env_file:
-      - .env
     ports:
-      - $PORT:$PORT
+      - 4900:4900
     build:
       context: .
       dockerfile: Dockerfile
     command: npm run start
-    environment:
-      - NODE_ENV=production

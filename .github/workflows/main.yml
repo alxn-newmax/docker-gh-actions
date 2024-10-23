@@ -42,11 +42,18 @@ jobs:
 
       - name: Update version in server
         uses: appleboy/ssh-action@v1.0.3
+        # env:
+        #   USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        #   PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: cd Desktop/services/docker-gh-actions && git pull origin master && docker-compose up -d
+          # envs: USERNAME,PASSWORD
+          # script: cd Desktop/test && echo "username=$USERNAME" >> credentials.txt && echo "password=$PASSWORD" >> credentials.txt && echo $PASSWORD | docker login -u $USERNAME --password-stdin && docker-compose up -d
+          # script: cd Desktop/services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && echo ${{ secrets.DOCKER_USERNAME }} > docker_username.txt && echo ${{ secrets.DOCKER_PASSWORD }} > docker_password.txt && docker system prune -f && docker logout && echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin && docker-compose up -d
+          # script: cd Desktop/services/${{ secrets.DOCKER_IMAGE }} && git clone https://github.com/alxn-newmax/docker-gh-actions.git .
           # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker ps && docker run -p 4900:4900 -d --rm --name test2 alxnnewmax/${{ secrets.DOCKER_IMAGE }}:master
           # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && "C:\Program Files\Git\bin\sh.exe" docker-up.sh
           # script: cd Desktop/core-services/${{ secrets.DOCKER_IMAGE }} && git pull origin master && docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} && docker compose up -d
