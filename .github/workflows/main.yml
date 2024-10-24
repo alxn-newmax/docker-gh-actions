@@ -25,9 +25,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            curl -X POST http://localhost:9988/service/${{ env.REPO_NAME }} \
-            -H "Content-Type: application/json" \
-            -d '{"commit": "${{ github.sha }}", "merge": "${{ github.event.pull_request.merged }}" }'
+            curl -X -H "Content-Type: application/json" -d '{"commit": "${{ github.sha }}", "merge": "${{ github.event.pull_request.merged }}" }' POST http://localhost:9988/service/${{ env.REPO_NAME }} 
             
+
           # script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
         
