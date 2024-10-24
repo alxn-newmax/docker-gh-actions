@@ -31,6 +31,5 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             curl -X POST http://localhost:9988/service/${{ env.REPO_NAME }} -H "Content-Type: application/json" -d "{\"commitId\": \"${{ github.sha }}\", \"message\": \"${{ env.COMMIT }}\"}"
-            
           # script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
         
