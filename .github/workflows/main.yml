@@ -12,10 +12,15 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Set repository name variable
+      - name: Get repository name
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d '/' -f 2)
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
+
+      - name: Get commit message
+        run: |
+          COMMIT=$(echo "${{ github.event.head_commit.message }}")
+          echo "COMMIT=${COMMIT}" >> $GITHUB_ENV
 
       - name: Update version in server
         id: update_version
@@ -25,6 +30,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            curl -X POST http://localhost:9988/service/${{ env.REPO_NAME }} -H "Content-Type: application/json" -d "{\"commit\": \"${{ github.sha }}\", \"merge\": \"${{ github.event.pull_request.merged }}\"}"
+            curl -X POST http://localhost:9988/service/${{ env.REPO_NAME }} -H "Content-Type: application/json" -d "{\"commitId\": \"${{ github.sha }}\", \"message\": \"${{ env.COMMIT }}\"}"
           # script: curl -X GET http://localhost:9988/service/${{ env.REPO_NAME }}
         
