@@ -1,8 +1,8 @@
-name: gh
+name: test
 
 services:
-  test:
-    container_name: test
+  docker-gh-actions:
+    container_name: docker-gh-actions
     ports:
       - 4900:4900
     build:
